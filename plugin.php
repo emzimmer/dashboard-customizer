@@ -11,46 +11,42 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// Only load in the admin
-if ( is_admin() ) :
 
-	/**
-	 * Cool definitions.
-	 *
-	 * @since 0.1
-	 */
-	define( 'EE_DASHBOARD_CUSTOMIZER', true );
-	define( 'EE_DASHBOARD_CUSTOMIZER_VERSION', '1.0.0' );
-	define( 'EE_DASHBOARD_CUSTOMIZER_INDEX', __FILE__ );
-	define( 'EE_DASHBOARD_CUSTOMIZER_ROOT', plugin_dir_path( EE_DASHBOARD_CUSTOMIZER_INDEX ) );
-	define( 'EE_DASHBOARD_CUSTOMIZER_URI', plugin_dir_url( EE_DASHBOARD_CUSTOMIZER_INDEX ) );
+/**
+ * Cool definitions.
+ *
+ * @since 0.1
+ */
+define( 'EE_DASHBOARD_CUSTOMIZER', true );
+define( 'EE_DASHBOARD_CUSTOMIZER_VERSION', '1.0.0' );
+define( 'EE_DASHBOARD_CUSTOMIZER_INDEX', __FILE__ );
+define( 'EE_DASHBOARD_CUSTOMIZER_ROOT', plugin_dir_path( EE_DASHBOARD_CUSTOMIZER_INDEX ) );
+define( 'EE_DASHBOARD_CUSTOMIZER_URI', plugin_dir_url( EE_DASHBOARD_CUSTOMIZER_INDEX ) );
 
 
-	/**
-	 * Helper definitions.
-	 *
-	 * @since 2.0.0
-	 */
-	define( 'EEDC_ADMIN', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/admin/' );
-	define( 'EEDC_ADMIN_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/admin/' );
+/**
+ * Helper definitions.
+ *
+ * @since 2.0.0
+ */
+define( 'EEDC_ADMIN', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/admin/' );
+define( 'EEDC_ADMIN_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/admin/' );
 
-	define( 'EEDC_CLASSES', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/classes/' );
-	define( 'EEDC_CLASSES_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/classes/' );
+define( 'EEDC_CLASSES', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/classes/' );
+define( 'EEDC_CLASSES_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/classes/' );
 
-	define( 'EEDC_INCLUDES', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/includes/' );
-	define( 'EEDC_INCLUDES_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/includes/' );
+define( 'EEDC_INCLUDES', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/includes/' );
+define( 'EEDC_INCLUDES_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/includes/' );
 
-	define( 'EEDC_SCRIPTS', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/scripts/' );
-	define( 'EEDC_STYLES', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/stylesheets/' );
+define( 'EEDC_SCRIPTS', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/scripts/' );
+define( 'EEDC_STYLES', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/stylesheets/' );
 
 
-	/**
-	 * Begin the startup process.
-	 *
-	 * @since 0.1
-	 */
-	require_once EEDC_CLASSES . 'config.php';
-	require_once EEDC_CLASSES . 'admin.php';
-	new EditorEnhancer_Dashboard_Customizer;
-
-endif;
+/**
+ * Begin the startup process.
+ *
+ * @since 0.1
+ */
+require_once EEDC_CLASSES . 'config.php';
+require_once EEDC_CLASSES . 'admin.php';
+new EditorEnhancer_Dashboard_Customizer;

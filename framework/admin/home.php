@@ -33,8 +33,6 @@
 
 </style>
 
-<pre><?php print_r(wp_roles()); ?></pre>
-
 <div class="eedc-home-wrap">
 
 	<div class="header-wrap">

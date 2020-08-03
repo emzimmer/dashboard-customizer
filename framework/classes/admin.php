@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Dashboard Customizer Admin.
  *
- * @since 0.1
+ * @since 1.0.0
  */
 class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Customizer_Config {
 
@@ -21,7 +21,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * License page actions.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public $license;
 
@@ -29,7 +29,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Init.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected function init() {
 
@@ -82,7 +82,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Add basic pages.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function addBasicPages() {
 		// Top level page and Home submenu
@@ -97,7 +97,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Get pages conditionally.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _addPagesConditionally() {
 		$this->_addPage( 'Settings' );
@@ -336,7 +336,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Home page content.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function homePage() {
 		// Check user capabilities
@@ -350,7 +350,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * License page content.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	public function licensePage() {
 		$license = $this->getOption( 'license_key' );
@@ -368,7 +368,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Settings page.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 */
 	public function settingsPage() {
 		$extra_description = null;
@@ -488,7 +488,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Register settings.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function registerSettings() {
 
@@ -534,7 +534,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 									// Options are only used for select fields
 									'options'     => isset( $fieldInfo['args']['options'] ) ? $fieldInfo['args']['options'] : array(),
 
-									// Custom values are added since 2.2.0 for Editor Optimizer
+									// Custom values are added since 1.0.0 for Editor Optimizer
 									'value' => isset( $fieldInfo['args']['value'] ) ? $fieldInfo['args']['value'] : false
 								)
 							);
@@ -550,7 +550,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Build pages.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function buildPages() {
 		foreach ( $this->_pageHierarchy as $page => $pageInfo ) :
@@ -571,7 +571,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Add a page.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _addPage( $title, $capability = 'manage_options' ) {
 		$slug = strtolower( str_replace( [ ' / ', ' ' ], '_', $title ) );
@@ -586,7 +586,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Add a section.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _addSection( $parent, $title ) {
 		$parentSlug = strtolower( str_replace( [ ' / ', ' ' ], '_', $parent ) );
@@ -604,7 +604,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Add a field.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _addField( $parent, $section, $label, $description, $type, $args = [] ) {
 
@@ -635,7 +635,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Return a page slug.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _doSlug( $slug ) {
 		return $this->prefix . '_' . $slug;
@@ -773,7 +773,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Set license actions.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _doLicenseActions() {
 		require_once 'license.php';
@@ -794,7 +794,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Update option data.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected function updateOption( $option, $data ) {
 		update_option( $this->prefix . '_' . $option, $data );
@@ -812,7 +812,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * Get page settings.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	private function _getPageSettings( $pageSlug ) {
 		$pageCallback = '_' . $pageSlug . 'PageSettings';
@@ -823,7 +823,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	/**
 	 * External link shortcut.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 */
 	private function _externalLink( $title, $url ) {
 		?>

@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Cool definitions.
  *
- * @since 0.1
+ * @since 1.0.0
  */
 define( 'EE_DASHBOARD_CUSTOMIZER', true );
 define( 'EE_DASHBOARD_CUSTOMIZER_VERSION', '1.0.0' );
@@ -27,7 +27,7 @@ define( 'EE_DASHBOARD_CUSTOMIZER_URI', plugin_dir_url( EE_DASHBOARD_CUSTOMIZER_I
 /**
  * Helper definitions.
  *
- * @since 2.0.0
+ * @since 1.0.0
  */
 define( 'EEDC_ADMIN', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/admin/' );
 define( 'EEDC_ADMIN_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/admin/' );
@@ -45,7 +45,7 @@ define( 'EEDC_STYLES', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/stylesheets/' );
 /**
  * Begin the startup process.
  *
- * @since 0.1
+ * @since 1.0.0
  */
 require_once EEDC_CLASSES . 'config.php';
 require_once EEDC_CLASSES . 'admin.php';

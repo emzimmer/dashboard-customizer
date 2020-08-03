@@ -4,16 +4,16 @@ defined( 'ABSPATH' ) || exit;
 
 
 /**
- * Editor Enhancer Config.
+ * Dashboard Customizer Config.
  *
- * @since 0.1
+ * @since 1.0.0
  */
 class EditorEnhancer_Dashboard_Customizer_Config {
 
 	/**
 	 * Debug.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected $debug = false;
 
@@ -29,7 +29,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * General variable prototypes.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected $name,
 			  $version,
@@ -42,7 +42,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	*/
 	public function __construct() {
 
@@ -66,7 +66,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Get option data.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected function getOption( $option ) {
 		return get_option( $this->prefix . '_' . $option );
@@ -76,7 +76,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Preferences checkbox checker.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 */
 	protected function preferenceExists( $preferenceName ) {
 		if ( isset( $this->preferences[$preferenceName] ) && $this->preferences[$preferenceName] )
@@ -89,7 +89,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Run updater functions.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function runUpdater() {
 
@@ -116,7 +116,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Check license.
 	 *
-	 * @since 1.0.3
+	 * @since 1.0.0
 	 */
 	protected function isValid( $test = false ) {
 		
@@ -160,10 +160,10 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 	/**
 	 * Debug function.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	protected function debug( $message ) {
 		if ( $this->debug )
-			echo '<script>console.log("Editor Enhancer: ' . $message . '");</script>';
+			echo '<script>console.log("Dashboard Customizer: ' . $message . '");</script>';
 	}
 }// End of class

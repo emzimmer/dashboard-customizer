@@ -4,9 +4,9 @@ defined( 'ABSPATH' ) || exit;
 
 
 /**
- * Editor Enhancer Admin License.
+ * Dashboard Customizer License.
  *
- * @since 0.1
+ * @since 1.0.0
  */
 class EditorEnhancer_DC_Admin_License {
 
@@ -26,7 +26,7 @@ class EditorEnhancer_DC_Admin_License {
 	/**
 	 * Register license option.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	public function registerLicenseOption() {
 		register_setting(
@@ -40,7 +40,7 @@ class EditorEnhancer_DC_Admin_License {
 	/**
 	 * Activate license key.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	public function activateLicense() {
 
@@ -155,7 +155,7 @@ class EditorEnhancer_DC_Admin_License {
 	/**
 	 * Deactivate license key.
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 */
 	public function deactivateLicense() {
 
@@ -217,7 +217,7 @@ class EditorEnhancer_DC_Admin_License {
 	/**
 	 * Admin notices for license.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	public function licenseNotices() {
 		if ( isset( $_GET['sl_activation'] ) && ! empty( $_GET['message'] ) ) {
@@ -245,7 +245,7 @@ class EditorEnhancer_DC_Admin_License {
 	/**
 	 * Sanitize license.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	public function sanitizeLicense( $new ) {
 		$old = get_option( $this->prefix . '_license_key' );

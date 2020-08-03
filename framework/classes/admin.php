@@ -56,6 +56,10 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 			add_action( 'admin_init', [ $this, 'doCustomFields' ] );
 			add_action( 'save_post', [ $this, 'saveCustomFields' ] );
 
+			// Post type columns
+			add_filter( 'manage_eedashboard_posts_columns', [ $this, 'set_custom_edit_eedashboard_columns' ] );
+			add_action( 'manage_eedashboard_posts_custom_column' , [ $this, 'custom_eedashboard_column' ], 10, 2 );
+
 			// Disable the admin bar if dashboard post type
 			add_action( 'wp', [ $this, 'disable_wpadmin_bar'] );
 
@@ -256,6 +260,28 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 				endif;
 			endif;
 		}
+	}
+
+
+	/**
+	 * Add column for user roles
+	 */
+
+	// Add the custom columns to the eedashboard post type:
+	public function set_custom_edit_eedashboard_columns( $columns ) {
+	    $columns['user_roles'] = __( 'User Roles', 'editor_enhancerdc' );
+	    return $columns;
+	}
+
+	// Add the data to the custom columns for the eedashboard post type:
+	public function custom_eedashboard_column( $column, $post_id ) {
+		if ( $column == 'user_roles' ) :
+			$usertypes = get_post_meta( $post_id , 'eedc_usertypes' , true );
+
+			foreach ( $usertypes as $usertype => $val ) :
+				echo ucfirst($usertype) . '<br>';
+			endforeach;
+		endif;
 	}
 
 

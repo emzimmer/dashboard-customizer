@@ -154,21 +154,23 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 */
 
 	public function saveCustomFields() {
-		global $post;
-		$roles = wp_roles();
+		if ( is_admin() ) :
+			global $post;
+			$roles = wp_roles();
 
-		$roles_for_db = [];
+			$roles_for_db = [];
 
-		foreach ( $roles->roles as $role => $data ) :
+			foreach ( $roles->roles as $role => $data ) :
 
-			if ( isset( $_POST['eedc-' . $role] ) )
-				$roles_for_db[$role] = $_POST['eedc-' . $role];
+				if ( isset( $_POST['eedc-' . $role] ) )
+					$roles_for_db[$role] = $_POST['eedc-' . $role];
 
-		endforeach;
-		
-		update_post_meta( $post->ID, 'eedc_usertypes', $roles_for_db );
+			endforeach;
+			
+			update_post_meta( $post->ID, 'eedc_usertypes', $roles_for_db );
 
-		//update_post_meta( $post->ID, 'eedc_widgets', $_POST['eedc_widgets'] );
+			//update_post_meta( $post->ID, 'eedc_widgets', $_POST['eedc_widgets'] );
+		endif;
 	}
 
 

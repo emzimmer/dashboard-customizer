@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Dashboard Customizer GIT
+ * Plugin Name: GIT Dashboard Customizer
  * Plugin URI: https://editorenhancer.com
  * Description: Design beautiful dashboards for yourself and your clients with Oxygen Builder.
  * Version: 1.1.0

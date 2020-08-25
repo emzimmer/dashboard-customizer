@@ -63,8 +63,13 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 			// Disable the admin bar if dashboard post type
 			add_action( 'wp', [ $this, 'disable_wpadmin_bar'] );
 
-			// Set up redirect
+			// Register the page
 			add_action('admin_menu', [ $this, 'register_dashboard_page' ] );
+
+			// For whatever reason, this has to be called just a little later......
+			add_action( 'admin_head', [ $this, 'remove_dashboard_submenu' ] );
+			
+			// Set up redirect
 			add_action( 'load-index.php', [ $this, 'redirect_dashboard' ] );
 
 		else :
@@ -191,8 +196,9 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	public function register_dashboard_page() {
 		// Add the dashboard page
 		add_dashboard_page( 'Custom Dashboard', 'Custom Dashboard', 'read', 'eedash', [ $this, 'create_dashboard' ] );
+	}
 
-		// Then, immediately remove the menu item
+	public function remove_dashboard_submenu() {
 		remove_submenu_page( 'index.php', 'eedash' );
 	}
 
@@ -252,7 +258,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	 * Redirect dashboard
 	 */
 	public function redirect_dashboard() {
-		if( is_admin() ) {
+		//if( is_admin() ) {
 
 			if ( $this->_get_user_dashboard() ) :
 				$screen = get_current_screen();
@@ -261,7 +267,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 					wp_redirect( admin_url( 'index.php?page=eedash' ) );
 				endif;
 			endif;
-		}
+		//}
 	}
 
 

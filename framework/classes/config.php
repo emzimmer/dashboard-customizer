@@ -58,7 +58,7 @@ class EditorEnhancer_Dashboard_Customizer_Config {
 		add_action( 'admin_init', [ $this, 'runUpdater' ], 0 );
 
 		// Load assets
-		//$this->preferences = $this->getOption( 'preferences' );
+		$this->preferences = $this->getOption( 'settings' );
 		$this->init();
 	}
 

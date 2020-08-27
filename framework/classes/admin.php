@@ -41,7 +41,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 		$this->_doLicenseActions();
 
 		// Build the pages and settings
-		//$this->_addPagesConditionally();
+		$this->_addPagesConditionally();
 
 		// Check license validity before running other methods
 		if ( $this->isValid() ) :
@@ -103,7 +103,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	 * Get pages conditionally.
 	 *
 	 * @since 1.0.0
-	 *
+	 */
 	private function _addPagesConditionally() {
 		$this->_addPage( 'Settings' );
 	}
@@ -238,7 +238,21 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	            border: none; 
 	            overflow-y: auto; 
 	            overflow-x: hidden; 
-	        } 
+	        }
+
+	        <?php
+
+	        if ( $this->preferenceExists( 'use_white_background' ) ) :
+	        	?>
+
+	        	#iframe-container {
+	        		background-color:white;
+		        }
+
+	        	<?php
+	        endif;
+
+	        ?>
 		</style>
 
 		<div id="iframe-container">

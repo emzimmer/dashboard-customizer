@@ -3,7 +3,7 @@
  * Plugin Name: GIT Dashboard Customizer
  * Plugin URI: https://editorenhancer.com
  * Description: Design beautiful dashboards for yourself and your clients with Oxygen Builder.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Editor Enhancer
  * Author URI: https://editorenhancer.com
  * Text Domain: editor_enhancerdc
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 define( 'EE_DASHBOARD_CUSTOMIZER', true );
-define( 'EE_DASHBOARD_CUSTOMIZER_VERSION', '1.1.0' );
+define( 'EE_DASHBOARD_CUSTOMIZER_VERSION', '1.2.0' );
 define( 'EE_DASHBOARD_CUSTOMIZER_INDEX', __FILE__ );
 define( 'EE_DASHBOARD_CUSTOMIZER_ROOT', plugin_dir_path( EE_DASHBOARD_CUSTOMIZER_INDEX ) );
 define( 'EE_DASHBOARD_CUSTOMIZER_URI', plugin_dir_url( EE_DASHBOARD_CUSTOMIZER_INDEX ) );

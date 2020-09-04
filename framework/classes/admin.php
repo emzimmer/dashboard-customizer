@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Customizer_Config {
+class EEDashboardCustomizer_Admin extends EditorEnhancer_Dashboard_Customizer_Config {
 
 	/**
 	 * Page hierarchy.
@@ -51,7 +51,6 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 			add_action( 'admin_menu', [ $this, 'buildPages' ] );
 
 			// Post type
-			add_action( 'init', [ $this, 'create_posttype' ] );
 			add_action( 'admin_menu', [ $this, 'addDashboardMenuItems' ] );
 			add_action( 'admin_init', [ $this, 'doCustomFields' ] );
 			add_action( 'save_post', [ $this, 'saveCustomFields' ] );
@@ -71,6 +70,8 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 			
 			// Set up redirect
 			add_action( 'load-index.php', [ $this, 'redirect_dashboard' ] );
+
+			//add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_special' ] );
 
 		else :
 			$this->debug( 'License not valid.' );
@@ -195,7 +196,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	 */
 	public function register_dashboard_page() {
 		// Add the dashboard page
-		add_dashboard_page( 'Custom Dashboard', 'Custom Dashboard', 'read', 'eedash', [ $this, 'create_dashboard' ] );
+		add_dashboard_page( 'Dashboard', 'Dashboard', 'read', 'eedash', [ $this, 'create_dashboard' ] );
 	}
 
 	public function remove_dashboard_submenu() {
@@ -255,9 +256,20 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 	        ?>
 		</style>
 
+			<?php //print_r( parse_shortcodes( get_post_meta( $dash, 'ct_builder_shortcodes' )[0] ) ); ?>
+
+			<?php
+
+			//global $media_queries_list;
+			//var_dump( $media_queries_list );
+
+			//var_dump(get_post_meta($dash, 'ct_builder_shortcodes'));
+
+?>
 		<div id="iframe-container">
+
 			<iframe
-			src="<?php echo get_home_url() . '/eedashboard/' . $dashboard[0]->post_name; ?>"
+			src="<?php echo get_home_url() . '/eedashboard/' . $dashboard[0]->post_name; ?>?custom_dashboard_active=true"
 			marginheight="0" 
 			marginwidth="0" 
 			width="100%" 
@@ -265,6 +277,7 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 			scrolling="auto"></iframe>
 		</div>
 		<?php
+		
 	}
 
 
@@ -444,62 +457,6 @@ class EditorEnhancer_Dashboard_Customizer extends EditorEnhancer_Dashboard_Custo
 		</div>
 		<?php
 	}
-
-
-	public function create_posttype() {
-		if ( is_user_logged_in() ) :
-			$labels = array(
-		        'name'                  => _x( 'Dashboards', 'Post type general name', 'editor_enhancerdc' ),
-		        'singular_name'         => _x( 'Dashboard', 'Post type singular name', 'editor_enhancerdc' ),
-		        'menu_name'             => _x( 'Dashboards', 'Admin Menu text', 'editor_enhancerdc' ),
-		        'name_admin_bar'        => _x( 'Dashboard', 'Add New on Toolbar', 'editor_enhancerdc' ),
-		        'add_new'               => __( 'Add New', 'editor_enhancerdc' ),
-		        'add_new_item'          => __( 'Add New Dashboard', 'editor_enhancerdc' ),
-		        'new_item'              => __( 'New Dashboard', 'editor_enhancerdc' ),
-		        'edit_item'             => __( 'Edit Dashboard', 'editor_enhancerdc' ),
-		        'view_item'             => __( 'View Dashboard', 'editor_enhancerdc' ),
-		        'all_items'             => __( 'All Dashboards', 'editor_enhancerdc' ),
-		        'search_items'          => __( 'Search Dashboards', 'editor_enhancerdc' ),
-		        'parent_item_colon'     => __( 'Parent Dashboards:', 'editor_enhancerdc' ),
-		        'not_found'             => __( 'No dashboards found.', 'editor_enhancerdc' ),
-		        'not_found_in_trash'    => __( 'No dashboards found in Trash.', 'editor_enhancerdc' ),
-		        'featured_image'        => _x( 'Dashboard Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'editor_enhancerdc' ),
-		        'set_featured_image'    => _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'editor_enhancerdc' ),
-		        'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'editor_enhancerdc' ),
-		        'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'editor_enhancerdc' ),
-		        'archives'              => _x( 'Dashboard archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'editor_enhancerdc' ),
-		        'insert_into_item'      => _x( 'Insert into dashboard', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'editor_enhancerdc' ),
-		        'uploaded_to_this_item' => _x( 'Uploaded to this dashboard', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'editor_enhancerdc' ),
-		        'filter_items_list'     => _x( 'Filter dashboards list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'editor_enhancerdc' ),
-		        'items_list_navigation' => _x( 'Dashboards list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'editor_enhancerdc' ),
-		        'items_list'            => _x( 'Dashboards list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'editor_enhancerdc' ),
-		    );
-		 
-		    $args = array(
-				'labels'             => $labels,
-				'public'             => false,
-				'publicly_queryable' => true,
-				'show_ui'            => true,
-				'show_in_menu'       => 'admin.php?page=eedc_home',
-				'show_in_nav_menus'  => false,
-				'show_in_admin_bar'  => false,
-				'show_in_rest'       => false,
-				'capability_type'    => 'post',
-				//'capabilities' => '',
-				'query_var'          => true,
-				'rewrite'            => array( 'slug' => 'eedashboard' ),
-				'has_archive'        => false,
-				'hierarchical'       => false,
-				//'menu_position'      => null,
-				'supports'           => array( 'title' ),
-		    );
-		 
-		    register_post_type( 'eedashboard', $args );
-
-		endif;
-
-	}
-
 
 
 	/****************************************************************************

@@ -25,6 +25,7 @@ settings_errors( $this->_doSlug( 'settings' ) . '_messages' );
 			</div>
 			<?php
 			$this->_addSetting( 'Use white background for dashboards. (Default is to use WP background color).', 'use_white_background', $options );
+			//$this->_addSetting( 'Remove dashboard footer. (Thank you message and WP version).', 'remove_dashboard_footer', $options );
 			?>
 		</div>
 

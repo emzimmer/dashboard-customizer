@@ -61,9 +61,9 @@ function ee_dashboard_customizer_init() {
 /**
  * Adds scripts for the iframe
  */
-add_action( 'wp_enqueue_scripts', 'enqueue_dashboard_customizer_special_scripts' );
+add_action( 'admin_enqueue_scripts', 'enqueue_dashboard_customizer_special_scripts' );
 function enqueue_dashboard_customizer_special_scripts() {
-	if ( isset( $_GET['custom_dashboard_active'] ) && $_GET['custom_dashboard_active'] == true ) :
+	//if ( isset( $_GET['custom_dashboard_active'] ) && $_GET['custom_dashboard_active'] == true ) :
 		wp_enqueue_script(
 			'eedc-dash',
 			EEDC_ADMIN_URI . 'dash.js',
@@ -71,7 +71,7 @@ function enqueue_dashboard_customizer_special_scripts() {
 			EE_DASHBOARD_CUSTOMIZER_VERSION,
 			true
 		);
-	endif;
+	//endif;
 }
 
 

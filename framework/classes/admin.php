@@ -226,7 +226,11 @@ class EEDashboardCustomizer_Admin extends EditorEnhancer_Dashboard_Customizer_Co
 				margin-left: -20px;
 				padding:0px;
 				overflow:hidden;
-				height: calc(100vh - 97px);
+				height: calc(100vh - 35px);
+			}
+
+			#wpbody-content {
+			    padding-bottom: 0;
 			}
 
 			iframe { 

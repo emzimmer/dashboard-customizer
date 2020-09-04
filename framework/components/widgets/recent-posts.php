@@ -58,15 +58,54 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 
 	
 	function customCSS($options, $selector) {
-		return '';
+		$css = $selector.' li {
+					
+				}
+
+		';
+
+		return $css;
 	}
 
 	function controls() {
 
+		$this->addOptionControl(
+			array(
+				'type'    => 'checkbox',
+				'name'    => 'Include Title',
+				'slug'    => 'include_title',
+				'default' => 'true'
+			)
+		)->rebuildElementOnChange();
+
+		$this->addOptionControl(
+			array(
+				'type'      => 'textfield',
+				'name'      => 'Title',
+				'slug'      => 'title',
+				'condition' => 'include_title=true',
+				'default'   => 'Recent Posts'
+			)
+		)->rebuildElementOnChange();
+
+		$this->addOptionControl(
+			array(
+				"type"    => "dropdown",
+				"name"    => "Layout",
+				"slug"    => "layout",
+				"default" => 'rows'
+			)
+		)->setValue(
+			array( 
+				"rows"   => "Rows",
+				'table' => 'Table'
+			)
+		)->rebuildElementOnChange();
 	}
 
 	function render($options, $defaults, $content) {
-		$query_args = array(
+
+		$args = array(
 			'post_type'      => 'post',
 			'post_status'    => 'publish',
 			'orderby'        => 'date',
@@ -76,65 +115,63 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 			'cache_results'  => false
 		);
 
-		/**
-		 * Filters the query arguments used for the Recent Posts widget.
-		 *
-		 * @since 4.2.0
-		 *
-		 * @param array $query_args The arguments passed to WP_Query to produce the list of posts.
-		 */
-		//$query_args = apply_filters( 'dashboard_recent_posts_query_args', $query_args );
-		$posts      = new WP_Query( $query_args );
+		$posts = new WP_Query( $args );
 
-		if ( $posts->have_posts() ) {
+		if ( $posts->have_posts() ) :
 
-			echo '<div id="published-posts" class="activity-block">';
+			// Do the heading conditionally
+			if ( $options['include_title'] && $options['title'] !== null )
+				echo '<h3>' . $options['title'] . '</h3>';
 
-			echo '<h3>Recently Published</h3>';
-
+			// Start the list
 			echo '<ul>';
 
 			$today    = current_time( 'Y-m-d' );
 			$tomorrow = current_datetime()->modify( '+1 day' )->format( 'Y-m-d' );
 			$year     = current_time( 'Y' );
 
-			while ( $posts->have_posts() ) {
+			while ( $posts->have_posts() ) :
+
 				$posts->the_post();
 
 				$time = get_the_time( 'U' );
-				if ( gmdate( 'Y-m-d', $time ) == $today ) {
+
+				if ( gmdate( 'Y-m-d', $time ) == $today ) :
 					$relative = __( 'Today' );
-				} elseif ( gmdate( 'Y-m-d', $time ) == $tomorrow ) {
+
+				elseif ( gmdate( 'Y-m-d', $time ) == $tomorrow ) :
 					$relative = __( 'Tomorrow' );
-				} elseif ( gmdate( 'Y', $time ) !== $year ) {
+
+				elseif ( gmdate( 'Y', $time ) !== $year ) :
 					/* translators: Date and time format for recent posts on the dashboard, from a different calendar year, see https://www.php.net/date */
 					$relative = date_i18n( __( 'M jS Y' ), $time );
-				} else {
+
+				else :
 					/* translators: Date and time format for recent posts on the dashboard, see https://www.php.net/date */
 					$relative = date_i18n( __( 'M jS' ), $time );
-				}
 
-				// Use the post edit link for those who can edit, the permalink otherwise.
-				//$recent_post_link = current_user_can( 'edit_post', get_the_ID() ) ? get_edit_post_link() : get_permalink();
+				endif;
 
-				$draft_or_post_title = get_the_title();
+				// Output the list item
 				printf(
 					'<li><span>%1$s</span> <a href="%2$s" aria-label="%3$s">%4$s</a></li>',
 					/* translators: 1: Relative date, 2: Time. */
 					sprintf( _x( '%1$s, %2$s', 'dashboard' ), $relative, get_the_time() ),
 					$recent_post_link,
 					/* translators: %s: Post title. */
-					esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $draft_or_post_title ) ),
-					$draft_or_post_title
+					esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), get_the_title() ) ),
+					get_the_title()
 				);
-			}
 
+			endwhile;
+
+			// End the list
 			echo '</ul>';
-			echo '</div>';
 
-		} else {
+		else :
 			return false;
-		}
+
+		endif;
 
 		wp_reset_postdata();
 
@@ -142,7 +179,14 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 	}
 
 	function defaultCSS() {
-		
+		$css = '.oxy-dashboard-customizer-recent-posts ul {
+					list-style:none;
+					padding:0;
+				}
+
+			';
+
+		return $css;
 	}
 
 	/**

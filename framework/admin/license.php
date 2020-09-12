@@ -1,4 +1,7 @@
 <div class="wrap">
+
+	<?php require_once 'tabs.php'; ?>
+	
 	<h1><?php _e('Plugin License Options'); ?></h1>
 
 	<form method="post" action="options.php">

@@ -62,7 +62,8 @@ class EEDashboardCustomizer_Interface extends EditorEnhancer_Dashboard_Customize
 		include_once EEDC_COMPONENTS . 'widgets/future-posts.php';
 		include_once EEDC_COMPONENTS . 'widgets/recent-comments.php';
 		include_once EEDC_COMPONENTS . 'widgets/site-health-status.php';
-		include_once EEDC_COMPONENTS . 'other/admin-link-starter.php';
+		include_once EEDC_COMPONENTS . 'links/admin-link-wrapper.php';
+		include_once EEDC_COMPONENTS . 'links/admin-text-link.php';
 	}
 
 	public function register_add_plus_section() {

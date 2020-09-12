@@ -1,11 +1,11 @@
 <?php
 
-class DC_Other_Admin_Link_Starter extends DashboardCustomizerEl {
+class DC_Other_Admin_Link_Wrapper extends DashboardCustomizerEl {
 
  //   var $js_added = false;
 
 	function name() {
-		return __('Admin Link Starter');
+		return __('Admin Link Wrapper');
 	}
 
 /*
@@ -74,24 +74,36 @@ class DC_Other_Admin_Link_Starter extends DashboardCustomizerEl {
 		$this->addOptionControl(
 			array(
 				'type' => 'textfield',
-				'name' => 'URL',
+				'name' => 'URL Tail',
 				'slug' => 'url'
 			)
 		)->rebuildElementOnChange();
+
+		$this->addCustomControl('<span style="color:rgba(255,255,255,0.9);">This component is expecting an admin-based URL. The "URL Tail" is <em>everything</em> after "wp-admin/" in your admin-based URL. For example, in this case:<br><br>"http://.../wp-admin/edit.php"<br><br>..the URL Tail is "edit.php".</span>');
 	}
 
 
 	function render($options, $defaults, $content) {
 
-		echo '<a href="' . get_admin_url() . $options['url'] . '">';
+		$empty = $content == null || $content == false ? ' eedc-admin-wrapper-empty' : '';
 
-		echo ct_do_shortcode( $content );
+		echo '<a class="eedc-admin-wrapper' . $empty . '" href="' . get_admin_url() . $options['url'] . '">';
+
+			echo ct_do_shortcode( $content );
 
 		echo '</a>';
 	}
 
 	function defaultCSS() {
 
+		$css = '.eedc-admin-wrapper-empty {
+			display:block;
+			min-width:100px;
+			min-height:100px;
+			outline: 1px dashed #bbb;
+		}';
+
+		return $css;
 	}
 
 	/**
@@ -106,4 +118,4 @@ class DC_Other_Admin_Link_Starter extends DashboardCustomizerEl {
 
 }
 
-new DC_Other_Admin_Link_Starter();
+new DC_Other_Admin_Link_Wrapper();

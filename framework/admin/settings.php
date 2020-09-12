@@ -13,6 +13,7 @@ if ( isset( $_GET['settings-updated'] ) ) {
 settings_errors( $this->_doSlug( 'settings' ) . '_messages' );
 ?>
 <div class="wrap">
+	<?php require_once 'tabs.php'; ?>
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 	<form action="options.php" method="post">
 		<?php

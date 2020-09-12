@@ -43,7 +43,8 @@
 	</div>
 
 	<div class="content-wrap">
-		<h1>Dashboard Customizer</h1>
+		<?php require_once 'tabs.php'; ?>
+		<h1>Welcome to Dashboard Customizer by Editor Enhancer!</h1>
 		<p>Great things await! This plugin lets you design custom dashboards for your users and clients. To get started:</p>
 		<ol>
 			<li><strong>Activate your license key.</strong> You'll see it when you <a href="https://editorenhancer.com/login" target="_blank">log in to your account</a> on the Editor Enhancer website.</li>

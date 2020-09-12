@@ -38,7 +38,7 @@ class DashboardCustomizerEl extends OxyEl {
 	 * Custom functions
 	 */
 	function slug() {
-		return 'dashboard_customizer-' . $this->name2slug( $this->name() );
+		return 'dashboard-customizer-' . $this->name2slug( $this->name() );
 	}
 
 	function optionEquals( $option, $value ) {

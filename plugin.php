@@ -33,6 +33,7 @@ define( 'EEDC_ADMIN', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/admin/' );
 define( 'EEDC_ADMIN_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/admin/' );
 define( 'EEDC_CLASSES', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/classes/' );
 define( 'EEDC_COMPONENTS', EE_DASHBOARD_CUSTOMIZER_ROOT . 'framework/components/' );
+define( 'EEDC_COMPONENTS_URI', EE_DASHBOARD_CUSTOMIZER_URI . 'framework/components/' );
 
 
 /**
@@ -61,8 +62,8 @@ function ee_dashboard_customizer_init() {
 /**
  * Adds scripts for the iframe
  */
-add_action( 'admin_enqueue_scripts', 'enqueue_dashboard_customizer_special_scripts' );
-function enqueue_dashboard_customizer_special_scripts() {
+add_action( 'admin_enqueue_scripts', 'enqueue_dashboard_customizer_iframe_scripts' );
+function enqueue_dashboard_customizer_iframe_scripts() {
 	//if ( isset( $_GET['custom_dashboard_active'] ) && $_GET['custom_dashboard_active'] == true ) :
 		wp_enqueue_script(
 			'eedc-dash',

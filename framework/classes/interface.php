@@ -23,6 +23,8 @@ class EEDashboardCustomizer_Interface extends EditorEnhancer_Dashboard_Customize
 			$this->load_files();
 			add_action( 'wp', [ $this, 'do_addplus_sections' ] );
 
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+
 			//$this->do_addplus_sections();
 
 		else :
@@ -86,6 +88,17 @@ class EEDashboardCustomizer_Interface extends EditorEnhancer_Dashboard_Customize
 			do_action( 'oxygen_add_plus_dashboard_customizer_' . strtolower( str_replace( ' ', '_', $category ) ) );
 
 		endforeach;
+
+	}
+
+	public function enqueue_scripts() {
+
+		wp_enqueue_script(
+			'eedc',
+			EEDC_COMPONENTS_URI . 'dash.js',
+			[],
+			EE_DASHBOARD_CUSTOMIZER_VERSION
+		);
 
 	}
 

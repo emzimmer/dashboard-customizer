@@ -40,7 +40,7 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 
 
 	function afterInit() {
-		$this->removeApplyParamsButton();
+		//$this->removeApplyParamsButton();
 	}
 
 	/*
@@ -124,6 +124,18 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 			)
 		)->rebuildElementOnChange();
 */
+
+
+
+		// Nothing found message
+		$this->addOptionControl(
+			array(
+				'type'      => 'textfield',
+				'name'      => 'No Posts Message',
+				'slug'      => 'no_posts_message',
+				'default'   => 'No recent posts found!'
+			)
+		);
 
 		/**
 		 * Title controls
@@ -265,11 +277,11 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 
 		$posts = new WP_Query( $args );
 
-		if ( $posts->have_posts() ) :
+		// Do the heading conditionally
+		if ( $options['include_title'] == 'true' && $options['title'] !== null )
+			echo '<' . $options['title_tag'] . ' class="eedc-rp-title">' . $options['title'] . '</' . $options['title_tag'] . '>';
 
-			// Do the heading conditionally
-			if ( $options['include_title'] == 'true' && $options['title'] !== null )
-				echo '<' . $options['title_tag'] . ' class="eedc-rp-title">' . $options['title'] . '</' . $options['title_tag'] . '>';
+		if ( $posts->have_posts() ) :
 
 			// Start the list
 			echo '<ul>';
@@ -334,7 +346,7 @@ class DC_Widget_Recent_Posts extends DashboardCustomizerEl {
 			echo '</ul>';
 
 		else :
-			return false;
+			echo $options['no_posts_message'];
 
 		endif;
 

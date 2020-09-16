@@ -40,7 +40,7 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 
 
 	function afterInit() {
-		$this->removeApplyParamsButton();
+		//$this->removeApplyParamsButton();
 	}
 
 	/*
@@ -124,6 +124,19 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 			)
 		)->rebuildElementOnChange();
 */
+
+
+		// Nothing found message
+		$this->addOptionControl(
+			array(
+				'type'      => 'textfield',
+				'name'      => 'No Posts Message',
+				'slug'      => 'no_posts_message',
+				'default'   => 'No future posts found!'
+			)
+		);
+
+
 
 		/**
 		 * Title controls
@@ -265,11 +278,11 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 
 		$posts = new WP_Query( $args );
 
-		if ( $posts->have_posts() ) :
+		// Do the heading conditionally
+		if ( $options['include_title'] && $options['title'] !== null )
+			echo '<' . $options['title_tag'] . ' class="eedc-fp-title">' . $options['title'] . '</' . $options['title_tag'] . '>';
 
-			// Do the heading conditionally
-			if ( $options['include_title'] && $options['title'] !== null )
-				echo '<' . $options['title_tag'] . ' class="eedc-fp-title">' . $options['title'] . '</' . $options['title_tag'] . '>';
+		if ( $posts->have_posts() ) :
 
 			// Start the list
 			echo '<ul>';
@@ -285,9 +298,9 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 				// Output the list item
 				echo '<li class="eedc-fp-li">';
 
-					$recent_post_link = current_user_can( 'edit_post', get_the_ID() ) ? get_edit_post_link() : get_permalink();
+					$future_post_link = current_user_can( 'edit_post', get_the_ID() ) ? get_edit_post_link() : get_permalink();
 
-					echo '<a class="eedc-fp-link" href="' . $recent_post_link . '">' . get_the_title() . '</a>';
+					echo '<a class="eedc-fp-link" href="' . $future_post_link . '">' . get_the_title() . '</a>';
 
 					// Only do the date stuff if the datetime is requested
 					if ( $options['display_date_time'] == 'true' ) :
@@ -301,11 +314,11 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 							$relative = __( 'Tomorrow' );
 
 						elseif ( gmdate( 'Y', $time ) !== $year ) :
-							/* translators: Date and time format for recent posts on the dashboard, from a different calendar year, see https://www.php.net/date */
+							/* translators: Date and time format for future posts on the dashboard, from a different calendar year, see https://www.php.net/date */
 							$relative = date_i18n( __( 'M jS Y' ), $time );
 
 						else :
-							/* translators: Date and time format for recent posts on the dashboard, see https://www.php.net/date */
+							/* translators: Date and time format for future posts on the dashboard, see https://www.php.net/date */
 							$relative = date_i18n( __( 'M jS' ), $time );
 
 						endif;
@@ -322,7 +335,7 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 			//		'<li><span>%1$s</span> <a href="%2$s" aria-label="%3$s">%4$s</a></li>',
 			//		/* translators: 1: Relative date, 2: Time. */
 			//		sprintf( _x( '%1$s, %2$s', 'dashboard' ), $relative, get_the_time() ),
-			//		$recent_post_link,
+			//		$future_post_link,
 			//		/* translators: %s: Post title. */
 			//		esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), get_the_title() ) ),
 			//		get_the_title()
@@ -334,7 +347,7 @@ class DC_Widget_Future_Posts extends DashboardCustomizerEl {
 			echo '</ul>';
 
 		else :
-			return false;
+			echo $options['no_posts_message'];
 
 		endif;
 
